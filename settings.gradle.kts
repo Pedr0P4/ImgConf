@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "ImgConf"
-include("app", "list", "utilities")
+include("app")
