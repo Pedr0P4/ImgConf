@@ -1,3 +1,5 @@
+package app;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -92,9 +94,5 @@ public class ImageEditor {
         }
 
         imageLabel.setIcon(new ImageIcon(currentImage));
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ImageEditor::new);
     }
 }
