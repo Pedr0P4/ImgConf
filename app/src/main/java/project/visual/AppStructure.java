@@ -12,6 +12,8 @@ public class AppStructure {
     private JFrame frame;
     private JLabel imageLabel;
     private BufferedImage currentImage;
+    private int currentBrightness = 0;
+    private int currentSaturation = 0;
 
     private FileMenu file;
     private EditMenu edit;
@@ -41,9 +43,55 @@ public class AppStructure {
         JMenuItem invertColorsItem = new JMenuItem("Invert Colors");
         invertColorsItem.addActionListener(e -> this.edit.invertColors());
 
-        fileMenu.add(loadItem);
+        JMenuItem adjustBrightnessItem = new JMenuItem("Adjust Brightness");
+        adjustBrightnessItem.addActionListener(e -> {
+            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, currentBrightness);
+            slider.setMajorTickSpacing(50);
+            slider.setMinorTickSpacing(10);
+            slider.setPaintTicks(true);
+            slider.setPaintLabels(true);
+
+            int result = JOptionPane.showConfirmDialog(
+                    frame,
+                    slider,
+                    "Adjust Brightness",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (result == JOptionPane.OK_OPTION) {
+                this.currentBrightness = slider.getValue();
+                edit.adjustBrightness(this.currentBrightness);
+            }
+        });
+
+        JMenuItem adjustSaturationItem = new JMenuItem("Adjust Saturation");
+        adjustSaturationItem.addActionListener(e -> {
+            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, currentSaturation);
+            slider.setMajorTickSpacing(50);
+            slider.setMinorTickSpacing(10);
+            slider.setPaintTicks(true);
+            slider.setPaintLabels(true);
+
+            int result = JOptionPane.showConfirmDialog(
+                    frame,
+                    slider,
+                    "Adjust Saturation",
+                    JOptionPane.OK_CANCEL_OPTION,
+                    JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (result == JOptionPane.OK_OPTION) {
+                this.currentSaturation = slider.getValue();
+                edit.adjustSaturation(this.currentSaturation);
+            }
+        });
+
         fileMenu.add(saveItem);
+        fileMenu.add(loadItem);
         editMenu.add(invertColorsItem);
+        editMenu.add(adjustBrightnessItem);
+        editMenu.add(adjustSaturationItem);
 
         menuBar.add(fileMenu);
         menuBar.add(editMenu);
