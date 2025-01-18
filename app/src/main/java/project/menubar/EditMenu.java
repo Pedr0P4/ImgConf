@@ -6,15 +6,10 @@ import java.awt.image.BufferedImage;
 
 import project.visual.*;
 
-public class EditMenu {
-    private AppStructure appStructure;
-    private BufferedImage currentImage;
-    private JFrame frame;
-    private JLabel imageLabel;
-
-    public EditMenu(AppStructure appStructure) {
-        this.appStructure = appStructure;
-    };
+public class EditMenu extends Menu{
+    public EditMenu(AppStructure appStructure){
+        super(appStructure);
+    }
 
     public void invertColors() {
         this.updateValues();
@@ -31,8 +26,8 @@ public class EditMenu {
                 currentImage.setRGB(x, y, invertedColor.getRGB());
             }
         }
-
-        appStructure.getImageLabel().setIcon(new ImageIcon(currentImage));
+        appStructure.setCurrentImage(currentImage);
+        repaintAndRevalidatePanel();
     }
 
     public void adjustBrightness(int brightness) {
@@ -65,7 +60,8 @@ public class EditMenu {
 
         // Atualizar a imagem exibida
         currentImage = adjustedImage;
-        imageLabel.setIcon(new ImageIcon(currentImage));
+        appStructure.setCurrentImage(adjustedImage);
+        appStructure.getImagePanel().repaint();
     }
 
     public void adjustSaturation(int saturation) {
@@ -102,12 +98,7 @@ public class EditMenu {
 
         // Atualizar a imagem exibida
         currentImage = adjustedImage;
-        imageLabel.setIcon(new ImageIcon(currentImage));
-    }
-
-    private void updateValues() {
-        this.currentImage = appStructure.getCurrentImage();
-        this.frame = appStructure.getFrame();
-        this.imageLabel = appStructure.getImageLabel();
+        appStructure.setCurrentImage(adjustedImage);
+        appStructure.getImagePanel().repaint();
     }
 }

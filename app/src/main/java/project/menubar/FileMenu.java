@@ -7,17 +7,9 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class FileMenu {
-    private AppStructure appStructure;
-    private BufferedImage currentImage;
-    private JFrame frame;
-    private JLabel imageLabel;
-
+public class FileMenu extends Menu {
     public FileMenu(AppStructure appStructure) {
-        this.appStructure = appStructure;
-        this.currentImage = appStructure.getCurrentImage();
-        this.frame = appStructure.getFrame();
-        this.imageLabel = appStructure.getImageLabel();
+        super(appStructure);
     }
 
     public void loadImage() {
@@ -28,11 +20,13 @@ public class FileMenu {
             try {
                 appStructure.setCurrentImage(ImageIO.read(file));
                 this.updateValues();
-                imageLabel.setIcon(new ImageIcon(currentImage));
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(frame, "Erro ao carregar a imagem.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+        appStructure.resetValues();
+        appStructure.getImagePanel().repaint();
+        appStructure.getImagePanel().revalidate();
     }
 
     public void saveImage() {
@@ -52,11 +46,5 @@ public class FileMenu {
                 JOptionPane.showMessageDialog(frame, "Salvamento falhou.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    }
-
-    private void updateValues() {
-        this.currentImage = appStructure.getCurrentImage();
-        this.frame = appStructure.getFrame();
-        this.imageLabel = appStructure.getImageLabel();
     }
 }
