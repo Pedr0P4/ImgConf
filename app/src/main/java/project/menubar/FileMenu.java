@@ -1,15 +1,15 @@
 package project.menubar;
 
+import project.other.Component;
 import project.visual.AppStructure;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class FileMenu extends Menu {
+public class FileMenu extends Component {
     public FileMenu(AppStructure appStructure) {
         super(appStructure);
     }
@@ -24,7 +24,6 @@ public class FileMenu extends Menu {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Export Image");
 
-        // Adicionar filtros para formatos suportados
         FileNameExtensionFilter pngFilter = new FileNameExtensionFilter("PNG Image (*.png)", "png");
         FileNameExtensionFilter jpgFilter = new FileNameExtensionFilter("JPEG Image (*.jpg, *.jpeg)", "jpg", "jpeg");
         FileNameExtensionFilter bmpFilter = new FileNameExtensionFilter("BMP Image (*.bmp)", "bmp");
@@ -32,7 +31,7 @@ public class FileMenu extends Menu {
         fileChooser.addChoosableFileFilter(pngFilter);
         fileChooser.addChoosableFileFilter(jpgFilter);
         fileChooser.addChoosableFileFilter(bmpFilter);
-        fileChooser.setFileFilter(pngFilter); // PNG como padrão
+        fileChooser.setFileFilter(pngFilter);
 
         int userChoice = fileChooser.showSaveDialog(frame);
 
@@ -41,14 +40,12 @@ public class FileMenu extends Menu {
             String selectedExtension = ((FileNameExtensionFilter) fileChooser.getFileFilter()).getExtensions()[0];
             String filePath = file.getAbsolutePath();
 
-            // Adicionar extensão automaticamente, se necessário
             if (!filePath.endsWith("." + selectedExtension)) {
                 filePath += "." + selectedExtension;
                 file = new File(filePath);
             }
 
             try {
-                // Salvar a imagem no formato selecionado
                 if (!ImageIO.write(currentImage, selectedExtension, file)) {
                     throw new IOException("Unsupported file format: " + selectedExtension);
                 }

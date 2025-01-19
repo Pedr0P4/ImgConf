@@ -1,12 +1,13 @@
 package project.menubar;
 
+import project.other.Component;
 import project.visual.AppStructure;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class FilterMenu extends Menu{
+public class FilterMenu extends Component {
     public FilterMenu(AppStructure appStructure) {
         super(appStructure);
     }
@@ -37,12 +38,10 @@ public class FilterMenu extends Menu{
                 int tg = (int)(0.349 * red + 0.686 * green + 0.168 * blue);
                 int tb = (int)(0.272 * red + 0.534 * green + 0.131 * blue);
 
-                // Clamping values to stay within 0-255 range
                 tr = Math.min(255, Math.max(0, tr));
                 tg = Math.min(255, Math.max(0, tg));
                 tb = Math.min(255, Math.max(0, tb));
 
-                // Set the new RGB value
                 sepiaImage.setRGB(x, y, (tr << 16) | (tg << 8) | tb);
             }
         }
@@ -70,7 +69,6 @@ public class FilterMenu extends Menu{
                 int green = (rgb >> 8) & 0xFF;
                 int blue = rgb & 0xFF;
 
-                // Cálculo da intensidade de cinza usando a fórmula luminosa
                 int gray = (int)(0.299 * red + 0.587 * green + 0.114 * blue);
                 gray = Math.min(255, Math.max(0, gray));
 
@@ -118,46 +116,6 @@ public class FilterMenu extends Menu{
         repaintAndRevalidatePanel();
     }
 
-    public void applyBlueEmbossFilter() {
-        updateValues();
-        if (currentImage == null) {
-            JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        saveStateForUndo();
-
-        int width = currentImage.getWidth();
-        int height = currentImage.getHeight();
-        BufferedImage blueEmbossImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        for (int y = 1; y < height; y++) {
-            for (int x = 1; x < width; x++) {
-                int rgb1 = currentImage.getRGB(x, y);
-                int rgb2 = currentImage.getRGB(x - 1, y - 1);
-
-                int red1 = (rgb1 >> 16) & 0xFF;
-                int green1 = (rgb1 >> 8) & 0xFF;
-                int blue1 = rgb1 & 0xFF;
-
-                int red2 = (rgb2 >> 16) & 0xFF;
-                int green2 = (rgb2 >> 8) & 0xFF;
-                int blue2 = rgb2 & 0xFF;
-
-                // Usamos a diferença entre os pixels para criar o efeito de relevo
-                int blue = Math.min(255, Math.max(0, blue1 - blue2 + 128));
-
-                // A componente vermelha e verde podem ser ajustadas ou removidas, já que o foco é no azul
-                int red = Math.min(255, Math.max(0, (red1 - red2) / 2 + 128));
-                int green = Math.min(255, Math.max(0, (green1 - green2) / 2 + 128));
-
-                blueEmbossImage.setRGB(x, y, (red << 16) | (green << 8) | blue);
-            }
-        }
-        appStructure.setCurrentImage(blueEmbossImage);
-        repaintAndRevalidatePanel();
-    }
-
     public void applySharpenFilter() {
         updateValues();
         if (currentImage == null) {
@@ -171,7 +129,7 @@ public class FilterMenu extends Menu{
         int height = currentImage.getHeight();
         BufferedImage sharpenedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        int[] kernel = {0, -1, 0, -1, 5,-1, 0, -1, 0};  // Filtro de convolução para nitidez
+        int[] kernel = {0, -1, 0, -1, 5,-1, 0, -1, 0};
         int kernelSize = 3;
         int offset = kernelSize / 2;
 

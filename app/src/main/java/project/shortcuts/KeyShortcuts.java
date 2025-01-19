@@ -1,14 +1,14 @@
-package project.menubar;
+package project.shortcuts;
 
 import project.visual.AppStructure;
-import project.menubar.FileMenu;
 
+import project.other.Component;
 import project.other.ActionExecutor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class KeyShortcuts extends Menu {
+public class KeyShortcuts extends Component {
     public KeyShortcuts(AppStructure appStructure) {
         super(appStructure);
     }
@@ -23,7 +23,6 @@ public class KeyShortcuts extends Menu {
     }
 
     private void keyShortcut(String shortcut, String shortcutName, ActionExecutor actionExecutor){
-        // Obter InputMap e ActionMap do painel principal
         InputMap inputMap = appStructure.getImagePanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = appStructure.getImagePanel().getActionMap();
 

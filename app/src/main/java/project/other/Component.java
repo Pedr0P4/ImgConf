@@ -1,4 +1,4 @@
-package project.menubar;
+package project.other;
 
 import project.visual.AppStructure;
 
@@ -6,19 +6,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Menu {
+public class Component {
     protected AppStructure appStructure;
     protected BufferedImage currentImage;
+    protected JPanel imagePanel;
     protected JFrame frame;
 
-    public Menu(AppStructure appStructure) {
+    public Component(AppStructure appStructure) {
         this.appStructure = appStructure;
         this.currentImage = appStructure.getCurrentImage();
+        this.imagePanel = appStructure.getImagePanel();
         this.frame = appStructure.getFrame();
     }
 
     protected void updateValues() {
         this.currentImage = appStructure.getCurrentImage();
+        this.imagePanel = appStructure.getImagePanel();
         this.frame = appStructure.getFrame();
     }
 
@@ -30,7 +33,7 @@ public class Menu {
     protected void saveStateForUndo() {
         if (currentImage != null) {
             appStructure.getUndoStack().push(copyImage(currentImage));
-            appStructure.getRedoStack().clear(); // Limpar o Redo sempre que uma nova ação for feita
+            appStructure.getRedoStack().clear();
         }
     }
 

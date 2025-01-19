@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+import project.other.Component;
 import project.visual.*;
 
-public class EditMenu extends Menu{
+public class EditMenu extends Component {
     public EditMenu(AppStructure appStructure){
         super(appStructure);
     }

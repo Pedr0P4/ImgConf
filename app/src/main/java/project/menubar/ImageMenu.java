@@ -1,11 +1,12 @@
 package project.menubar;
 
+import project.other.Component;
 import project.visual.AppStructure;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
 
-public class ImageMenu extends Menu {
+public class ImageMenu extends Component {
     public ImageMenu(AppStructure appStructure) {
         super(appStructure);
     }
@@ -19,7 +20,6 @@ public class ImageMenu extends Menu {
 
         saveStateForUndo();
 
-        // Criar uma nova imagem para armazenar o resultado
         BufferedImage flippedImage = new BufferedImage(
                 currentImage.getWidth(),
                 currentImage.getHeight(),
