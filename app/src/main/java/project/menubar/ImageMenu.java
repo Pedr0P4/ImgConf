@@ -17,6 +17,8 @@ public class ImageMenu extends Menu {
             return;
         }
 
+        saveStateForUndo();
+
         // Criar uma nova imagem para armazenar o resultado
         BufferedImage flippedImage = new BufferedImage(
                 currentImage.getWidth(),

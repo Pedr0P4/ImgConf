@@ -3,6 +3,7 @@ package project.menubar;
 import project.visual.AppStructure;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class FilterMenu extends Menu{
@@ -16,6 +17,9 @@ public class FilterMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
+
         int width = currentImage.getWidth();
         int height = currentImage.getHeight();
 
@@ -52,6 +56,9 @@ public class FilterMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
+
         int width = currentImage.getWidth();
         int height = currentImage.getHeight();
         BufferedImage grayImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -80,6 +87,9 @@ public class FilterMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
+
         int width = currentImage.getWidth();
         int height = currentImage.getHeight();
         BufferedImage embossedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -114,6 +124,9 @@ public class FilterMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
+
         int width = currentImage.getWidth();
         int height = currentImage.getHeight();
         BufferedImage blueEmbossImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -151,6 +164,9 @@ public class FilterMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
+
         int width = currentImage.getWidth();
         int height = currentImage.getHeight();
         BufferedImage sharpenedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -183,5 +199,25 @@ public class FilterMenu extends Menu{
         repaintAndRevalidatePanel();
     }
 
+    public void invertColors() {
+        this.updateValues();
+        if (currentImage == null) {
+            JOptionPane.showMessageDialog(appStructure.getFrame(), "Carregamento da imagem falhou.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        saveStateForUndo();
+
+        for (int y = 0; y < currentImage.getHeight(); y++) {
+            for (int x = 0; x < currentImage.getWidth(); x++) {
+                int rgba = currentImage.getRGB(x, y);
+                Color color = new Color(rgba, true);
+                Color invertedColor = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue(), color.getAlpha());
+                currentImage.setRGB(x, y, invertedColor.getRGB());
+            }
+        }
+        appStructure.setCurrentImage(currentImage);
+        repaintAndRevalidatePanel();
+    }
 
 }

@@ -11,31 +11,14 @@ public class EditMenu extends Menu{
         super(appStructure);
     }
 
-    public void invertColors() {
-        this.updateValues();
-        if (currentImage == null) {
-            JOptionPane.showMessageDialog(appStructure.getFrame(), "Carregamento da imagem falhou.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        for (int y = 0; y < currentImage.getHeight(); y++) {
-            for (int x = 0; x < currentImage.getWidth(); x++) {
-                int rgba = currentImage.getRGB(x, y);
-                Color color = new Color(rgba, true);
-                Color invertedColor = new Color(255 - color.getRed(), 255 - color.getGreen(), 255 - color.getBlue(), color.getAlpha());
-                currentImage.setRGB(x, y, invertedColor.getRGB());
-            }
-        }
-        appStructure.setCurrentImage(currentImage);
-        repaintAndRevalidatePanel();
-    }
-
     public void adjustBrightness(int brightness) {
         this.updateValues();
         if (currentImage == null) {
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
 
         // Criar uma nova imagem para aplicar o ajuste
         BufferedImage adjustedImage = new BufferedImage(
@@ -70,6 +53,8 @@ public class EditMenu extends Menu{
             JOptionPane.showMessageDialog(frame, "No image loaded.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+
+        saveStateForUndo();
 
         // Criar uma nova imagem para aplicar o ajuste
         BufferedImage adjustedImage = new BufferedImage(

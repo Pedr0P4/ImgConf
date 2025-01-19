@@ -4,6 +4,7 @@ import project.menubar.EditMenu;
 import project.menubar.FileMenu;
 import project.menubar.ImageMenu;
 import project.menubar.FilterMenu;
+import project.menubar.KeyShortcuts;
 
 import java.awt.*;
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.awt.image.BufferedImage;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Stack;
 
 public class AppStructure {
     private static AppStructure instance;
@@ -26,10 +28,14 @@ public class AppStructure {
     private int currentBrightness = 0;
     private int currentSaturation = 0;
 
+    private Stack<BufferedImage> undoStack = new Stack<>();
+    private Stack<BufferedImage> redoStack = new Stack<>();
+
     private FileMenu file;
     private ImageMenu image;
     private EditMenu edit;
     private FilterMenu filter;
+    private KeyShortcuts keyShortcuts;
 
     public AppStructure() {
         frame = new JFrame("Image Editor");
@@ -58,6 +64,9 @@ public class AppStructure {
         image = new ImageMenu(this);
         edit = new EditMenu(this);
         filter = new FilterMenu(this);
+        keyShortcuts = new KeyShortcuts(this);
+
+        keyShortcuts.setupKeyboardShortcuts();
         
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
@@ -68,17 +77,20 @@ public class AppStructure {
         JMenuItem loadItem = new JMenuItem("Load Image");
         loadItem.addActionListener(e -> this.file.loadImage());
 
-        JMenuItem saveItem = new JMenuItem("Save Image");
-        saveItem.addActionListener(e -> this.file.saveImage());
+        JMenuItem saveItem = new JMenuItem("Export Image");
+        saveItem.addActionListener(e -> this.file.exportImage());
+
+        JMenuItem undoItem = new JMenuItem("Undo");
+        undoItem.addActionListener(e -> this.file.undo());
+
+        JMenuItem redoItem = new JMenuItem("Redo");
+        redoItem.addActionListener(e -> this.file.redo());
 
         JMenuItem flipHorizontalItem = new JMenuItem("Flip Horizontal");
         flipHorizontalItem.addActionListener(e -> this.image.flipImage(true));
 
         JMenuItem flipVerticalItem = new JMenuItem("Flip Vertical");
         flipVerticalItem.addActionListener(e -> this.image.flipImage(false));
-
-        JMenuItem invertColorsItem = new JMenuItem("Invert Colors");
-        invertColorsItem.addActionListener(e -> this.edit.invertColors());
 
         JMenuItem adjustBrightnessItem = new JMenuItem("Adjust Brightness");
         adjustBrightnessItem.addActionListener(e -> {
@@ -138,21 +150,11 @@ public class AppStructure {
         JMenuItem sharpenFilterItem = new JMenuItem("Sharpen Filter");
         sharpenFilterItem.addActionListener(e -> filter.applySharpenFilter());
 
+        JMenuItem negativeFilterItem = new JMenuItem("Negative Filter");
+        negativeFilterItem.addActionListener(e -> filter.invertColors());
+
         // Painel principal com layout BorderLayout
         JPanel mainPanel = new JPanel(new BorderLayout());
-
-        // Painel lateral para ícones ou ferramentas
-        JPanel sidebar = new JPanel();
-        sidebar.setPreferredSize(new Dimension(100, 0)); // 100px de largura
-        sidebar.setBackground(Color.LIGHT_GRAY);
-        sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
-
-        // Adicionar botões ou ícones na barra lateral
-        JButton btnTool1 = new JButton("Tool 1");
-        JButton btnTool2 = new JButton("Tool 2");
-        sidebar.add(btnTool1);
-        sidebar.add(Box.createRigidArea(new Dimension(0, 10))); // Espaço entre os botões
-        sidebar.add(btnTool2);
 
         // Adicionar suporte ao zoom com a rolagem do mouse
         imagePanel.addMouseWheelListener(new MouseWheelListener() {
@@ -194,20 +196,21 @@ public class AppStructure {
         });
 
         // Adicionar componentes ao painel principal
-        mainPanel.add(sidebar, BorderLayout.WEST); // Barra lateral à esquerda
         mainPanel.add(imagePanel, BorderLayout.CENTER); // Área da imagem ao centro
 
         fileMenu.add(saveItem);
         fileMenu.add(loadItem);
+        fileMenu.add(undoItem);
+        fileMenu.add(redoItem);
         imageMenu.add(flipHorizontalItem);
         imageMenu.add(flipVerticalItem);
-        editMenu.add(invertColorsItem);
         editMenu.add(adjustBrightnessItem);
         editMenu.add(adjustSaturationItem);
         filterMenu.add(sepiaFilterItem);
         filterMenu.add(grayScaleFilterItem);
         filterMenu.add(embossFilterItem);
         filterMenu.add(sharpenFilterItem);
+        filterMenu.add(negativeFilterItem);
 
         menuBar.add(fileMenu);
         menuBar.add(imageMenu);
@@ -241,6 +244,30 @@ public class AppStructure {
 
     public JPanel getImagePanel() {
         return this.imagePanel;
+    }
+
+    public Stack<BufferedImage> getUndoStack() {
+        return this.undoStack;
+    }
+
+    public Stack<BufferedImage> getRedoStack() {
+        return this.redoStack;
+    }
+
+    public FileMenu getFileMenu() {
+        return this.file;
+    }
+
+    public ImageMenu getImageMenu() {
+        return this.image;
+    }
+
+    public EditMenu getEditMenu() {
+        return this.edit;
+    }
+
+    public FilterMenu getFilterMenu() {
+        return this.filter;
     }
 
     public void resetValues(){
