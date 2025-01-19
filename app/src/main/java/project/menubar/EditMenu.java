@@ -87,4 +87,27 @@ public class EditMenu extends Component {
         appStructure.setCurrentImage(adjustedImage);
         appStructure.getImagePanel().repaint();
     }
+
+    public void resizeImage(int newWidth, int newHeight) {
+        // Atualiza os valores antes de tudo
+        updateValues();
+        if (currentImage == null) {
+            JOptionPane.showMessageDialog(frame, "No image loaded", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Cria uma nova imagem redimensionada
+        BufferedImage resizedImage = new BufferedImage(newWidth, newHeight, currentImage.getType());
+        Graphics2D g2d = resizedImage.createGraphics();
+
+        // Redimensiona a imagem
+        g2d.drawImage(currentImage, 0, 0, newWidth, newHeight, null);
+        g2d.dispose();
+
+        // Atualiza a imagem exibida
+        currentImage = resizedImage;
+        appStructure.setCurrentImage(currentImage);
+        appStructure.updateImageInfo();
+        repaintAndRevalidatePanel();
+    }
 }

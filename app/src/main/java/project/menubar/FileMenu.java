@@ -69,8 +69,8 @@ public class FileMenu extends Component {
             }
         }
         appStructure.resetValues();
-        appStructure.getImagePanel().repaint();
-        appStructure.getImagePanel().revalidate();
+        appStructure.updateImageInfo();
+        repaintAndRevalidatePanel();
     }
 
     public void undo() {

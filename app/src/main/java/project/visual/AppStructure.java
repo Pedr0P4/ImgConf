@@ -2,6 +2,7 @@ package project.visual;
 
 import project.menubar.*;
 
+import project.other.ResizeDialog;
 import project.shortcuts.KeyShortcuts;
 import project.shortcuts.MouseShortcuts;
 
@@ -24,8 +25,7 @@ public class AppStructure {
     private int imageX = 0;
     private int imageY = 0;
     private int dragStartX, dragStartY;
-    private int currentBrightness = 0;
-    private int currentSaturation = 0;
+    private JLabel imageInfoLabel;
 
     private Stack<BufferedImage> undoStack = new Stack<>();
     private Stack<BufferedImage> redoStack = new Stack<>();
@@ -43,6 +43,7 @@ public class AppStructure {
         setupFrame();
         setupImagePanel();
         menusInitializer();
+        imageInfoLabelInitializer();
         keyShortcuts.setupKeyboardShortcuts();
         mouseShortcuts.setupMouseShortcuts();
         
@@ -152,8 +153,6 @@ public class AppStructure {
     public void resetValues(){
         this.imageX = 0;
         this.imageY = 0;
-        this.currentSaturation = 0;
-        this.currentBrightness = 0;
         this.zoomFactor = 0.7;
     }
 
@@ -189,6 +188,12 @@ public class AppStructure {
         help = new HelpMenu(this);
         keyShortcuts = new KeyShortcuts(this);
         mouseShortcuts = new MouseShortcuts(this);
+    }
+
+    private void imageInfoLabelInitializer() {
+        imageInfoLabel = new JLabel("No image loaded."); // Texto inicial
+        imageInfoLabel.setHorizontalAlignment(SwingConstants.CENTER); // Centralizado
+        frame.add(imageInfoLabel, BorderLayout.SOUTH); // Adiciona ao rodapé
     }
 
     private void setupFileMenu(JMenuBar menuBar) {
@@ -234,7 +239,7 @@ public class AppStructure {
 
         JMenuItem adjustBrightnessItem = new JMenuItem("Adjust Brightness");
         adjustBrightnessItem.addActionListener(e -> {
-            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, currentBrightness);
+            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
             slider.setMajorTickSpacing(50);
             slider.setMinorTickSpacing(10);
             slider.setPaintTicks(true);
@@ -249,8 +254,8 @@ public class AppStructure {
             );
 
             if (result == JOptionPane.OK_OPTION) {
-                this.currentBrightness = slider.getValue();
-                edit.adjustBrightness(this.currentBrightness);
+                int brightness = slider.getValue();
+                edit.adjustBrightness(brightness);
                 imagePanel.revalidate();
                 imagePanel.repaint();
             }
@@ -258,7 +263,7 @@ public class AppStructure {
 
         JMenuItem adjustSaturationItem = new JMenuItem("Adjust Saturation");
         adjustSaturationItem.addActionListener(e -> {
-            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, currentSaturation);
+            JSlider slider = new JSlider(JSlider.HORIZONTAL, -100, 100, 0);
             slider.setMajorTickSpacing(50);
             slider.setMinorTickSpacing(10);
             slider.setPaintTicks(true);
@@ -273,13 +278,29 @@ public class AppStructure {
             );
 
             if (result == JOptionPane.OK_OPTION) {
-                this.currentSaturation = slider.getValue();
-                edit.adjustSaturation(this.currentSaturation);
+                int saturation = slider.getValue();
+                edit.adjustSaturation(saturation);
+            }
+        });
+
+        JMenuItem resizeImageItem = new JMenuItem("Resize Image");
+        resizeImageItem.addActionListener(e -> {
+            ResizeDialog dialog = new ResizeDialog(frame); // Passa o frame principal como pai
+            if (dialog.isConfirmed()) {
+                int newWidth = dialog.getWidthValue();
+                int newHeight = dialog.getHeightValue();
+
+                if (newWidth > 0 && newHeight > 0) {
+                    edit.resizeImage(newWidth, newHeight); // Chama a função de redimensionamento
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Invalid dimensions entered.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
         editMenu.add(adjustBrightnessItem);
         editMenu.add(adjustSaturationItem);
+        editMenu.add(resizeImageItem);
 
         menuBar.add(editMenu);
     }
@@ -328,5 +349,15 @@ public class AppStructure {
         helpMenu.add(aboutItem);
 
         menuBar.add(helpMenu);
+    }
+
+    public void updateImageInfo() {
+        if (currentImage != null) {
+            int width = currentImage.getWidth();
+            int height = currentImage.getHeight();
+            imageInfoLabel.setText("Width: " + width + " px, Height: " + height + " px");
+        } else {
+            imageInfoLabel.setText("No image loaded.");
+        }
     }
 }

@@ -16,7 +16,7 @@ public class HelpMenu extends Component {
 
         // Configurações do layout
         dialog.setLayout(new BorderLayout());
-        dialog.setSize(400, 300);
+        dialog.setSize(400, 425);
         dialog.setLocationRelativeTo(null); // Centraliza na tela
 
         // Título
@@ -26,10 +26,24 @@ public class HelpMenu extends Component {
 
         // Conteúdo com atalhos
         String shortcuts = """
+                --------------------------------------
+                File:
+                
                 Ctrl + L: Load File
                 Ctrl + E: Export Image
                 Ctrl + Z: Undo
                 Ctrl + Shift + Z: Redo
+                --------------------------------------
+                Image:
+                
+                Ctrl + Shift + H: Flip Horizontal
+                Ctrl + Shift + V: Flip Vertical
+                --------------------------------------
+                Edit:
+                
+                Ctrl + Shift + B: Adjust Brightness
+                Ctrl + Shift + S: Adjust Saturation
+                --------------------------------------
                 """;
 
         JTextArea textArea = new JTextArea(shortcuts);
