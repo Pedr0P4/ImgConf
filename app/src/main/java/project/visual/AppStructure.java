@@ -1,9 +1,6 @@
 package project.visual;
 
-import project.menubar.EditMenu;
-import project.menubar.FileMenu;
-import project.menubar.ImageMenu;
-import project.menubar.FilterMenu;
+import project.menubar.*;
 
 import project.shortcuts.KeyShortcuts;
 import project.shortcuts.MouseShortcuts;
@@ -37,6 +34,7 @@ public class AppStructure {
     private ImageMenu image;
     private EditMenu edit;
     private FilterMenu filter;
+    private HelpMenu help;
 
     private KeyShortcuts keyShortcuts;
     private MouseShortcuts mouseShortcuts;
@@ -53,6 +51,7 @@ public class AppStructure {
         setupImageMenu(menuBar);
         setupEditMenu(menuBar);
         setupFilterMenu(menuBar);
+        setupHelpMenu(menuBar);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(imagePanel, BorderLayout.CENTER); // Área da imagem ao centro
@@ -187,6 +186,7 @@ public class AppStructure {
         image = new ImageMenu(this);
         edit = new EditMenu(this);
         filter = new FilterMenu(this);
+        help = new HelpMenu(this);
         keyShortcuts = new KeyShortcuts(this);
         mouseShortcuts = new MouseShortcuts(this);
     }
@@ -309,5 +309,24 @@ public class AppStructure {
         filterMenu.add(negativeFilterItem);
 
         menuBar.add(filterMenu);
+    }
+
+    private void setupHelpMenu(JMenuBar menuBar){
+        JMenu helpMenu = new JMenu("Help");
+
+        JMenuItem keyboardShortcutsItem = new JMenuItem("Keyboard Shortcuts");
+        keyboardShortcutsItem.addActionListener(e -> help.showKeyboardShortcuts());
+
+        JMenuItem mouseShortcutsItem = new JMenuItem("Mouse Shortcuts");
+        mouseShortcutsItem.addActionListener(e -> help.showMouseShortcuts());
+
+        JMenuItem aboutItem = new JMenuItem("About");
+        aboutItem.addActionListener(e -> help.showAbout());
+
+        helpMenu.add(keyboardShortcutsItem);
+        helpMenu.add(mouseShortcutsItem);
+        helpMenu.add(aboutItem);
+
+        menuBar.add(helpMenu);
     }
 }
