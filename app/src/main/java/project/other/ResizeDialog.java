@@ -9,6 +9,7 @@ public class ResizeDialog extends JDialog {
     private JTextField heightField;
     private boolean confirmed = false;
 
+    // Caixa para alterar as dimensões da imagem
     public ResizeDialog(JFrame parent) {
         super(parent, "Resize Image", true);
         setLayout(new GridLayout(3, 2, 10, 10));
@@ -46,6 +47,7 @@ public class ResizeDialog extends JDialog {
         setVisible(true);
     }
 
+    // Quando o botão OK é clicado
     private void onOk(ActionEvent e) {
         confirmed = true; // Marca como confirmado
         dispose(); // Fecha o diálogo
@@ -55,6 +57,7 @@ public class ResizeDialog extends JDialog {
         return confirmed;
     }
 
+    // Coleta do valor da largura
     public int getWidthValue() {
         try {
             return Integer.parseInt(widthField.getText());
@@ -63,6 +66,7 @@ public class ResizeDialog extends JDialog {
         }
     }
 
+    // Coleta do valor da altura
     public int getHeightValue() {
         try {
             return Integer.parseInt(heightField.getText());

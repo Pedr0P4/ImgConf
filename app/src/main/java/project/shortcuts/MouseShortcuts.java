@@ -13,6 +13,7 @@ public class MouseShortcuts extends Component {
         dragWithMouse();
     }
 
+    // Método para dar zoom com a "bolinha" do mouse (Mouse Wheel)
     private void zoomWithMouse() {
         updateValues();
         imagePanel.addMouseWheelListener(new MouseWheelListener() {
@@ -29,6 +30,7 @@ public class MouseShortcuts extends Component {
         });
     }
 
+    // Método para mover a imagem segurando e arrastando o mouse
     private void dragWithMouse() {
         updateValues();
         imagePanel.addMouseListener(new MouseAdapter() {

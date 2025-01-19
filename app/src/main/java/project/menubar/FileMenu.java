@@ -14,6 +14,7 @@ public class FileMenu extends Component {
         super(appStructure);
     }
 
+    // Método para exportar a imagem para PNG, JPEG ou BMP.
     public void exportImage() {
         updateValues();
         if (currentImage == null) {
@@ -56,6 +57,7 @@ public class FileMenu extends Component {
         }
     }
 
+    // Método para carregar a imagem para a edição (demais métodos não funcionam sem carregar uma imagem)
     public void loadImage() {
         JFileChooser fileChooser = new JFileChooser();
         int result = fileChooser.showOpenDialog(frame);
@@ -65,7 +67,7 @@ public class FileMenu extends Component {
                 appStructure.setCurrentImage(ImageIO.read(file));
                 this.updateValues();
             } catch (IOException e) {
-                JOptionPane.showMessageDialog(frame, "Erro ao carregar a imagem.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Failed to load image.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         appStructure.resetValues();
@@ -73,23 +75,25 @@ public class FileMenu extends Component {
         repaintAndRevalidatePanel();
     }
 
+    // Método para desfazer uma alteração
     public void undo() {
         updateValues();
         if (!appStructure.getUndoStack().isEmpty()) {
-            appStructure.getRedoStack().push(copyImage(currentImage)); // Salvar o estado atual no Redo
-            appStructure.setCurrentImage(appStructure.getUndoStack().pop()); // Recuperar o último estado do Undo
-            repaintAndRevalidatePanel(); // Atualizar o painel
+            appStructure.getRedoStack().push(copyImage(currentImage));
+            appStructure.setCurrentImage(appStructure.getUndoStack().pop());
+            repaintAndRevalidatePanel();
         } else {
             JOptionPane.showMessageDialog(frame, "No more actions to undo.", "Undo", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
+    // Método para refazer uma alteração desfeita
     public void redo() {
         updateValues();
         if (!appStructure.getRedoStack().isEmpty()) {
-            appStructure.getUndoStack().push(copyImage(currentImage)); // Salvar o estado atual no Undo
-            appStructure.setCurrentImage(appStructure.getRedoStack().pop()); // Recuperar o último estado do Redo
-            repaintAndRevalidatePanel(); // Atualizar o painel
+            appStructure.getUndoStack().push(copyImage(currentImage));
+            appStructure.setCurrentImage(appStructure.getRedoStack().pop());
+            repaintAndRevalidatePanel();
         } else {
             JOptionPane.showMessageDialog(frame, "No more actions to redo.", "Redo", JOptionPane.INFORMATION_MESSAGE);
         }

@@ -13,6 +13,7 @@ public class KeyShortcuts extends Component {
         super(appStructure);
     }
 
+    // Cria os atalhos do teclado
     public void setupKeyboardShortcuts() {
         keyShortcut("control Z", "Undo", () -> appStructure.getFileMenu().undo());
         keyShortcut("control shift Z", "Redo", () -> appStructure.getFileMenu().redo());
@@ -22,6 +23,7 @@ public class KeyShortcuts extends Component {
         keyShortcut("control shift V", "Flip Vertical", () -> appStructure.getImageMenu().flipImage(false));
     }
 
+    // Método para criar os atalhos do teclado
     private void keyShortcut(String shortcut, String shortcutName, ActionExecutor actionExecutor){
         InputMap inputMap = appStructure.getImagePanel().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = appStructure.getImagePanel().getActionMap();

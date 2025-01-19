@@ -9,6 +9,7 @@ import java.awt.*;
 public class HelpMenu extends Component {
     public HelpMenu(AppStructure appStructure) {super(appStructure);}
 
+    // Método para mostrar os atalhos de teclado
     public void showKeyboardShortcuts() {
         // Cria o diálogo
         JDialog dialog = new JDialog((Frame) null, "Keyboard Shortcuts", true);
@@ -62,6 +63,7 @@ public class HelpMenu extends Component {
         dialog.setVisible(true);
     }
 
+    // Método para mostrar os atalhos com o mouse
     public void showMouseShortcuts() {
         // Cria o diálogo
         JDialog dialog = new JDialog((Frame) null, "Keyboard Shortcuts", true);
@@ -99,6 +101,7 @@ public class HelpMenu extends Component {
         dialog.setVisible(true);
     }
 
+    // Método para mostrar o "Sobre" do programa
     public void showAbout() {
         // Cria o diálogo
         JDialog dialog = new JDialog((Frame) null, "About", true);

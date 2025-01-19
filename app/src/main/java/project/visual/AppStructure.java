@@ -150,12 +150,14 @@ public class AppStructure {
         this.dragStartY = dragStartY;
     }
 
+    // Reseta a posição e zoom da imagem
     public void resetValues(){
         this.imageX = 0;
         this.imageY = 0;
         this.zoomFactor = 0.7;
     }
 
+    // Inicializa o frame
     private void setupFrame() {
         this.frame = new JFrame("Image Editor");
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -163,6 +165,7 @@ public class AppStructure {
         this.frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
+    // Inicializa o imagePanel (onde a imagem será exibida)
     private void setupImagePanel() {
         imagePanel = new JPanel() {
             @Override
@@ -180,6 +183,7 @@ public class AppStructure {
         imagePanel.setBackground(new Color(87, 87, 87));
     }
 
+    // Inicializa os menus e atalhos
     private void menusInitializer() {
         file = new FileMenu(this);
         image = new ImageMenu(this);
@@ -190,12 +194,14 @@ public class AppStructure {
         mouseShortcuts = new MouseShortcuts(this);
     }
 
+    // inicializa as infos da imagem que ficarão do rodapé do programa
     private void imageInfoLabelInitializer() {
         imageInfoLabel = new JLabel("No image loaded."); // Texto inicial
         imageInfoLabel.setHorizontalAlignment(SwingConstants.CENTER); // Centralizado
         frame.add(imageInfoLabel, BorderLayout.SOUTH); // Adiciona ao rodapé
     }
 
+    // Inicializa o menu File
     private void setupFileMenu(JMenuBar menuBar) {
         JMenu fileMenu = new JMenu("File");
 
@@ -219,6 +225,7 @@ public class AppStructure {
         menuBar.add(fileMenu);
     }
 
+    // Inicializa o menu Image
     private void setupImageMenu(JMenuBar menuBar) {
         JMenu imageMenu = new JMenu("Image");
 
@@ -234,6 +241,7 @@ public class AppStructure {
         menuBar.add(imageMenu);
     }
 
+    // Inicializa o menu Edit
     private void setupEditMenu(JMenuBar menuBar) {
         JMenu editMenu = new JMenu("Edit");
 
@@ -305,6 +313,7 @@ public class AppStructure {
         menuBar.add(editMenu);
     }
 
+    // Inicializa o menu Filter
     private void setupFilterMenu(JMenuBar menuBar) {
         JMenu filterMenu = new JMenu("Filter");
 
@@ -332,6 +341,7 @@ public class AppStructure {
         menuBar.add(filterMenu);
     }
 
+    // Inicializa o menu Help
     private void setupHelpMenu(JMenuBar menuBar){
         JMenu helpMenu = new JMenu("Help");
 
@@ -351,6 +361,7 @@ public class AppStructure {
         menuBar.add(helpMenu);
     }
 
+    // Atualiza as informações da imagem para ser exibida no rodapé do programa
     public void updateImageInfo() {
         if (currentImage != null) {
             int width = currentImage.getWidth();

@@ -12,6 +12,7 @@ public class Component {
     protected JPanel imagePanel;
     protected JFrame frame;
 
+    // Construtor
     public Component(AppStructure appStructure) {
         this.appStructure = appStructure;
         this.currentImage = appStructure.getCurrentImage();
@@ -19,17 +20,20 @@ public class Component {
         this.frame = appStructure.getFrame();
     }
 
+    // Atualiza os valores de acordo com os valores atuais do app
     protected void updateValues() {
         this.currentImage = appStructure.getCurrentImage();
         this.imagePanel = appStructure.getImagePanel();
         this.frame = appStructure.getFrame();
     }
 
+    // Redesenha o imagePanel (para atualizar possiveis alterações)
     protected void repaintAndRevalidatePanel(){
         appStructure.getImagePanel().repaint();
         appStructure.getImagePanel().revalidate();
     }
 
+    // Salva o estado atual na stack de Undo, para que seja possível refazer os passos feitos
     protected void saveStateForUndo() {
         if (currentImage != null) {
             appStructure.getUndoStack().push(copyImage(currentImage));
@@ -37,6 +41,7 @@ public class Component {
         }
     }
 
+    // Faz uma cópia do estado atual
     protected BufferedImage copyImage(BufferedImage source) {
         BufferedImage copy = new BufferedImage(source.getWidth(), source.getHeight(), source.getType());
         Graphics g = copy.getGraphics();

@@ -11,6 +11,9 @@ public class ImageMenu extends Component {
         super(appStructure);
     }
 
+    // Método para inverter a imagem horizontalmente ou verticalmente dependendo do valor do parâmetro
+    // True - Inverte horizontalmente
+    // False - Inverte verticalmente
     public void flipImage(boolean horizontal) {
         updateValues();
         if (currentImage == null) {
@@ -31,17 +34,14 @@ public class ImageMenu extends Component {
 
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                // Calcular o novo pixel baseado na direção do espelhamento
                 int newX = horizontal ? width - 1 - x : x;
                 int newY = horizontal ? y : height - 1 - y;
 
-                // Pegar a cor original e colocá-la na nova posição
                 int rgb = currentImage.getRGB(x, y);
                 flippedImage.setRGB(newX, newY, rgb);
             }
         }
 
-        // Atualizar a imagem exibida
         appStructure.setCurrentImage(flippedImage);
         repaintAndRevalidatePanel();
     }

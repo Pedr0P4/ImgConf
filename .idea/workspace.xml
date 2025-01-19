@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e24f9ed3-03b8-4f48-b472-5791826e216b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/project/other/ResizeDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/project/menubar/EditMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/menubar/EditMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/project/menubar/FileMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/menubar/FileMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/menubar/FilterMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/menubar/FilterMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/project/menubar/HelpMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/menubar/HelpMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/menubar/ImageMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/menubar/ImageMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/other/ActionExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/other/ActionExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/other/Component.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/other/Component.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/other/ResizeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/other/ResizeDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/shortcuts/KeyShortcuts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/shortcuts/KeyShortcuts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/project/shortcuts/MouseShortcuts.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/shortcuts/MouseShortcuts.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/project/visual/AppStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/project/visual/AppStructure.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +134,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Gradle.imd0040-projeto-final-imgconf [build]">
+  <component name="RunManager" selected="Gradle.imd0040-projeto-final-imgconf [run]">
     <configuration name="imd0040-projeto-final-imgconf [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -241,8 +247,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.imd0040-projeto-final-imgconf [build]" />
         <item itemvalue="Gradle.imd0040-projeto-final-imgconf [run]" />
+        <item itemvalue="Gradle.imd0040-projeto-final-imgconf [build]" />
         <item itemvalue="Gradle.imd0040-projeto-final-imgconf [assemble]" />
         <item itemvalue="Gradle.imd0040-projeto-final-imgconf [clean]" />
         <item itemvalue="Gradle.imd0040-projeto-final-imgconf:app [run]" />
@@ -274,7 +280,7 @@
       <workItem from="1737216923216" duration="2301000" />
       <workItem from="1737219238186" duration="15252000" />
       <workItem from="1737245342324" duration="7121000" />
-      <workItem from="1737299046462" duration="10406000" />
+      <workItem from="1737299046462" duration="12242000" />
     </task>
     <servers />
   </component>

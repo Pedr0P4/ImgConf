@@ -12,6 +12,7 @@ public class FilterMenu extends Component {
         super(appStructure);
     }
 
+    // Aplica o filtro Sepia, deixando com um aspecto mais antigo
     public void applySepiaFilter() {
         updateValues();
         if (currentImage == null) {
@@ -49,6 +50,7 @@ public class FilterMenu extends Component {
         repaintAndRevalidatePanel();
     }
 
+    // Aplica o filtro de tons de cinza, deixando a imagem em tons de cinza ("preto e branco")
     public void applyGrayscaleFilter() {
         updateValues();
         if (currentImage == null) {
@@ -79,6 +81,7 @@ public class FilterMenu extends Component {
         repaintAndRevalidatePanel();
     }
 
+    // Aplica o filtro de Emboss, fazendo a imagem parecer q tem relevo
     public void applyEmbossFilter() {
         updateValues();
         if (currentImage == null) {
@@ -116,6 +119,7 @@ public class FilterMenu extends Component {
         repaintAndRevalidatePanel();
     }
 
+    // Aplica o filtro de Sharpen (nitidez), deixando a imagem mais nitida
     public void applySharpenFilter() {
         updateValues();
         if (currentImage == null) {
@@ -157,10 +161,11 @@ public class FilterMenu extends Component {
         repaintAndRevalidatePanel();
     }
 
+    // Aplica o filtro de negativo na imagem, deixando ela com as cores "invertidas"
     public void invertColors() {
         this.updateValues();
         if (currentImage == null) {
-            JOptionPane.showMessageDialog(appStructure.getFrame(), "Carregamento da imagem falhou.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(appStructure.getFrame(), "No image loaded..", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
