@@ -44,8 +44,8 @@ public class AppStructure {
         setupImagePanel();
         menusInitializer();
         imageInfoLabelInitializer();
-        keyShortcuts.setupKeyboardShortcuts();
-        mouseShortcuts.setupMouseShortcuts();
+        keyShortcuts.initializeShortcuts();
+        mouseShortcuts.initializeShortcuts();
         
         JMenuBar menuBar = new JMenuBar();
         setupFileMenu(menuBar);
