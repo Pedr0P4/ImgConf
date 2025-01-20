@@ -40,11 +40,6 @@ public class HelpMenu extends Component {
                 Ctrl + Shift + H: Flip Horizontal
                 Ctrl + Shift + V: Flip Vertical
                 --------------------------------------
-                Edit:
-                
-                Ctrl + Shift + B: Adjust Brightness
-                Ctrl + Shift + S: Adjust Saturation
-                --------------------------------------
                 """;
 
         JTextArea textArea = new JTextArea(shortcuts);
