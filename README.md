@@ -31,8 +31,17 @@ E para dar run, basta abrir o terminal na pasta raiz e dar um
 
 ## 🎥 Link do vídeo de apresentação do programa 🎥
 <div>
+    <a href="https://www.loom.com/share/33300284bd544c97a59b453ab0c2b807">
+      <p>Projeto Final Unidade III - Explicação do projeto (requisitos e afins)</p>
+    </a>
+    <a href="https://www.loom.com/share/33300284bd544c97a59b453ab0c2b807">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/33300284bd544c97a59b453ab0c2b807-3b4cc17b4e4297f0-full-play.gif">
+    </a>
+  </div>
+
+<div>
     <a href="https://www.loom.com/share/d607e2dc78394dc78d7aba22c7e97fa1">
-      <p>Projeto Final Unidade III - ImgConf (Demonstração) - Watch Video</p>
+      <p>Projeto Final Unidade III - ImgConf (Demonstração)</p>
     </a>
     <a href="https://www.loom.com/share/d607e2dc78394dc78d7aba22c7e97fa1">
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/d607e2dc78394dc78d7aba22c7e97fa1-30022067e3a0291f-full-play.gif">
