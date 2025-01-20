@@ -5,10 +5,11 @@ import project.visual.AppStructure;
 
 import java.awt.event.*;
 
-public class MouseShortcuts extends Component {
+public class MouseShortcuts extends Component implements ShortcutsInterface {
     public MouseShortcuts(AppStructure appStructure) {super(appStructure);}
 
-    public void setupMouseShortcuts() {
+    //Cria e inicializa os atalhos do mouse
+    public void initializeShortcuts() {
         zoomWithMouse();
         dragWithMouse();
     }

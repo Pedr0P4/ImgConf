@@ -7,14 +7,15 @@ import project.other.ActionExecutor;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class KeyShortcuts extends Component {
+public class KeyShortcuts extends Component implements ShortcutsInterface {
     public KeyShortcuts(AppStructure appStructure) {
         super(appStructure);
     }
 
-    // Cria os atalhos do teclado
-    public void setupKeyboardShortcuts() {
+    // Cria e inicializa os atalhos do teclado
+    public void initializeShortcuts() {
         keyShortcut("control Z", "Undo", () -> appStructure.getFileMenu().undo());
         keyShortcut("control shift Z", "Redo", () -> appStructure.getFileMenu().redo());
         keyShortcut("control E", "Export Image", () -> appStructure.getFileMenu().exportImage());
